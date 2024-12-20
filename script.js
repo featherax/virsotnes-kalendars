@@ -24,3 +24,24 @@ for (let day = 1; day <= daysInMonth; day++) {
 
     calendar.appendChild(dayDiv);
 }
+
+// Ielādē datus no Google Sheets
+fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7kxqcZl4DZhkDN8rf9Wlvj8efL444O4qRHzuuFALCcsxuQco43tVymqa/pub?output=csv')
+    .then(response => response.text())
+    .then(data => {
+        const rows = data.split('\n').slice(1); // Izlaiž virsraksta rindu
+        rows.forEach(row => {
+            const [name, date, link, color] = row.split(',');
+            const eventDate = new Date(date).getDate();
+
+            // Atrodi pareizo dienas elementu
+            const dayElements = document.querySelectorAll('.day');
+            dayElements.forEach(dayEl => {
+                if (parseInt(dayEl.textContent) === eventDate) {
+                    dayEl.style.position = 'relative';
+                    dayEl.innerHTML += `<a href="${link}" target="_blank" class="event" style="color: ${color};">${name}</a>`;
+                }
+            });
+        });
+    })
+    .catch(error => console.error('Error loading data:', error));
