@@ -72,3 +72,17 @@ body {
     border: 1px solid transparent;
     cursor: default;
 }
+
+.event {
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.event::before {
+    content: "•";
+    margin-right: 5px;
+    font-size: 16px;
+}
