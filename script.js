@@ -8,7 +8,7 @@ const firstDayOffset = 6;
 // Pievieno tukšos elementus līdz pirmajai dienai (1. decembrim)
 for (let i = 0; i < firstDayOffset; i++) {
     const emptyDiv = document.createElement('div');
-    emptyDiv.classList.add('day');
+    emptyDiv.classList.add('day', 'inactive');
     calendar.appendChild(emptyDiv);
 }
 
