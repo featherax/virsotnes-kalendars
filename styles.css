@@ -128,3 +128,37 @@ body {
     color: #0043b3;
     text-decoration: none;
 }
+.event-box {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.event-box img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.event-box h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.event-box p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.event-box a {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #0043b3;
+    text-decoration: none;
+}
