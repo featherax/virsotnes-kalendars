@@ -85,6 +85,6 @@ body {
 .event::before {
     font-size: 20px;
     color: inherit; /* Krāsa no Google Sheets */
-    margin-right: 20px; /* Atstarpe starp burbulīti un tekstu */
+    margin-right: 0px; /* Atstarpe starp burbulīti un tekstu */
     line-height: 1;
 }
