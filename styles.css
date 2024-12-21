@@ -68,7 +68,9 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: 6px;
+    line-height: 1.2; /* Adjust line spacing */
+    margin: 2px 0; /* Reduce spacing between previews */
+    padding: 0 5px; /* Adjust padding inside the box */
 }
 
 .event-preview span {
