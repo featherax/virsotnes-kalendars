@@ -81,11 +81,18 @@ body {
     font-size: 12px;
     color: #0043b3; /* Tumši zils teksts */
     text-decoration: none; /* Noņem linka apakšsvītru */
-    white-space: nowrap;
-    overflow: hidden; /* Paslēpt pārāk garu tekstu */
-    text-overflow: ellipsis;
-    margin-top: 25px; /* Atstāj vietu zem datuma cipara */
+    overflow: hidden; /* Paslēpj tekstu ārpus kvadrāta */
+    text-overflow: ellipsis; /* Pievieno "..." pārāk gariem tekstiem */
+    white-space: normal; /* Atļauj tekstu lauzt jaunā rindā */
+    word-break: break-word; /* Pārlauž vārdus, ja tie ir pārāk gari */
+    line-height: 1.2; /* Uzlabo teksta lasāmību */
+    max-height: calc(1.2em * 2); /* Ierobežo augstumu līdz divām rindiņām */
     z-index: 0; /* Zemāka prioritāte nekā datuma ciparam */
+    position: relative; /* Nodrošina, ka z-index tiek izmantots */
+}
+
+.event + .event {
+    margin-top: 5px; /* Mazāka atstarpe starp vairākiem eventiem */
 }
 
 .event::before {
