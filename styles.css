@@ -63,7 +63,7 @@ body {
 .event-preview {
     display: flex;
     align-items: center; /* Align the bullet and text vertically */
-    font-size: 10px; /* Reduce font size */
+    font-size: 16px; /* Reduce font size */
     color: #0043B3; /* Blue text color */
     margin: 0; /* Remove external margin */
     padding: 0 2px; /* Minimal padding */
