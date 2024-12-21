@@ -32,9 +32,15 @@ fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7k
     .then(response => response.text())
     .then(data => {
         const rows = data.split('\n').slice(1);
+        const eventMap = {};
+
         rows.forEach(row => {
-            const [name, date, link, color] = row.split(',');
+            const [name, date, link, color, imageUrl, description] = row.split(',');
             const eventDate = new Date(date).getDate();
+
+            if (!eventMap[eventDate]) eventMap[eventDate] = [];
+            eventMap[eventDate].push({ name, link, color, imageUrl, description });
+
             const dayElements = document.querySelectorAll('.day');
             dayElements.forEach(dayEl => {
                 const dateSpan = dayEl.querySelector('.date-number');
@@ -43,7 +49,7 @@ fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7k
                     preview.classList.add('event-preview');
                     preview.innerHTML = `<span style="color: ${color};">•</span> ${name.substring(0, 16)}...`;
                     dayEl.appendChild(preview);
-                    dayEl.addEventListener('click', () => showEventLog([{ name, link, color }], eventDate));
+                    dayEl.addEventListener('click', () => showEventLog(eventMap[eventDate], eventDate));
                 }
             });
         });
@@ -54,7 +60,13 @@ function showEventLog(events, date) {
     events.forEach(event => {
         const eventBox = document.createElement('div');
         eventBox.classList.add('event-box');
-        eventBox.innerHTML = `<div class="event-details"><h3>${event.name}</h3><a href="${event.link}" target="_blank">Apskatīt vairāk</a></div>`;
+        eventBox.innerHTML = `
+            <img src="${event.imageUrl.trim()}" alt="${event.name}" />
+            <div class="event-details">
+                <h3>${event.name}</h3>
+                <p>${event.description || "Nav apraksta pieejams."}</p>
+                <a href="${event.link.trim()}" target="_blank">Apskatīt vairāk</a>
+            </div>`;
         eventContent.appendChild(eventBox);
     });
     calendar.style.display = 'none';
