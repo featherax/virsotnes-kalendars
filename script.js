@@ -34,6 +34,14 @@ for (let day = 1; day <= daysInMonth; day++) {
     calendar.appendChild(dayDiv);
 }
 
+// Pievieno tukšos elementus pēc pēdējās dienas
+const remainingDays = (7 - ((firstDayOffset + daysInMonth) % 7)) % 7;
+for (let i = 0; i < remainingDays; i++) {
+    const emptyDiv = document.createElement('div');
+    emptyDiv.classList.add('day', 'inactive');
+    calendar.appendChild(emptyDiv);
+}
+
 // Datu ielāde no Google Sheets
 fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7kxqcZl4DZhkDN8rf9Wlvj8efL444O4qRHzuuFALCcsxuQco43tVymqa/pub?output=csv')
     .then(response => response.text())
