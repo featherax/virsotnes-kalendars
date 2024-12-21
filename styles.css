@@ -26,19 +26,23 @@ body {
 
 .day {
     border: 1px solid #0043b3;
-    padding: 5px 10px; /* Neliels padding augšā un kreisajā pusē */
-    text-align: left; /* Teksts novietots pa kreisi */
+    padding: 5px 10px;
+    text-align: left;
     font-size: 16px;
     color: #0043b3;
     background-color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
-    position: relative; /* Nodrošina burbulīša pozicionēšanu */
+    position: relative;
+    min-height: 80px; /* Vienāds minimālais augstums visiem kvadrātiem */
+    display: flex;
+    flex-direction: column; /* Atļauj sakārtot datumu un tekstu vertikāli */
+    justify-content: flex-start; /* Saturs augšpusē */
 }
 
 .day .date-number {
-    font-weight: normal; /* Normāls svars datumiem */
-    color: #0043b3; /* Tumši zila krāsa */
+    font-weight: normal;
+    color: #0043b3;
     font-size: 14px;
     position: absolute;
     top: 5px;
@@ -52,7 +56,9 @@ body {
 .today {
     background-color: #b3d9ff;
     font-weight: bold;
-    color: #000;
+    color: #0043b3;
+    border: 2px solid #0043b3; /* Papildu apmale šodienas datumam */
+    border-radius: 5px;
 }
 
 .today .date-number {
@@ -70,16 +76,17 @@ body {
 
 .event {
     display: flex;
-    align-items: center;
-    margin-top: 15px; /* Nedaudz atstatums zem datuma */
+    align-items: center; /* Vertikāla izlīdzināšana ar burbulīti */
+    margin-top: 20px;
     font-size: 14px;
     color: #0043b3; /* Tumši zils teksts */
     text-decoration: none; /* Noņem linka apakšsvītru */
 }
 
 .event::before {
-    content: "•"; /* Burbulītis pirms teksta */
-    font-size: 18px; /* Lielāks burbulītis */
-    color: inherit; /* Mantot krāsu no Google Sheets */
-    margin-right: 5px;
+    content: "•"; /* Vienīgais burbulītis */
+    font-size: 18px;
+    color: inherit; /* Krāsa no Google Sheets */
+    margin-right: 10px; /* Atstarpe starp burbulīti un tekstu */
+    line-height: 1;
 }
