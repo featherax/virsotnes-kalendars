@@ -1,27 +1,7 @@
 const calendar = document.getElementById('calendar');
-const popupContainer = document.getElementById('popup-container');
-const popupContent = document.getElementById('popup-content');
+const eventLog = document.getElementById('event-log');
+const eventContent = document.getElementById('event-content');
 const backToCalendar = document.getElementById('back-to-calendar');
-
-const daysInMonth = 31;
-const today = new Date().getDate();
-const firstDayOffset = 6;
-
-// Tiek pievienotas tukšās dienas
-for (let i = 0; i < firstDayOffset; i++) {
-    const emptyDiv = document.createElement('div');
-    emptyDiv.classList.add('day', 'inactive');
-    calendar.appendChild(emptyDiv);
-}
-
-// Tiek pievienoti mēneša datumi
-for (let day = 1; day <= daysInMonth; day++) {
-    const dayDiv = document.createElement('div');
-    dayDiv.classList.add('day');
-    dayDiv.innerHTML = `<span class="date-number">${day}</span>`;
-    if (day === today) dayDiv.classList.add('today');
-    calendar.appendChild(dayDiv);
-}
 
 // Datu ielāde no Google Sheets
 fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7kxqcZl4DZhkDN8rf9Wlvj8efL444O4qRHzuuFALCcsxuQco43tVymqa/pub?output=csv')
@@ -42,14 +22,17 @@ fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7k
             const date = parseInt(dayEl.textContent);
 
             if (eventsByDate[date]) {
-                dayEl.addEventListener('click', () => showPopup(eventsByDate[date]));
+                dayEl.addEventListener('click', () => {
+                    showEventLog(eventsByDate[date], date);
+                });
             }
         });
     });
 
-// Funkcija pop-up loga parādīšanai
-function showPopup(events) {
-    popupContent.innerHTML = ''; // Tīrām vecos datus
+// Funkcija eventu loga parādīšanai
+function showEventLog(events, date) {
+    eventContent.innerHTML = `<h2>Notikumi ${date}. datumā</h2>`;
+
     events.forEach(event => {
         const eventBox = document.createElement('div');
         eventBox.classList.add('event-box');
@@ -59,15 +42,18 @@ function showPopup(events) {
             <div class="event-details">
                 <h3>${event.name}</h3>
                 <p>${event.description || ''}</p>
+                <a href="${event.link}" target="_blank">Apskatīt vairāk</a>
             </div>
         `;
-        popupContent.appendChild(eventBox);
+        eventContent.appendChild(eventBox);
     });
 
-    popupContainer.classList.remove('hidden');
+    calendar.style.display = 'none';
+    eventLog.style.display = 'block';
 }
 
 // Atgriešanās pie kalendāra
 backToCalendar.addEventListener('click', () => {
-    popupContainer.classList.add('hidden');
+    eventLog.style.display = 'none';
+    calendar.style.display = 'grid';
 });
