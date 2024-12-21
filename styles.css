@@ -83,9 +83,8 @@ body {
 }
 
 .event::before {
-    content: " "; /* Vienīgais burbulītis */
-    font-size: 18px;
+    font-size: 20px;
     color: inherit; /* Krāsa no Google Sheets */
-    margin-right: 10px; /* Atstarpe starp burbulīti un tekstu */
+    margin-right: 20px; /* Atstarpe starp burbulīti un tekstu */
     line-height: 1;
 }
