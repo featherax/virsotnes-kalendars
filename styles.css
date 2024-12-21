@@ -91,8 +91,8 @@ body {
 }
 
 .event span {
-      font-size: 20px;
-    margin-right: 12px; /* Atstarpe starp burbulīti un tekstu */
-    margin-left: 12px; /* Your styling rules here */
+      font-size: 30px;
+    margin-right: 8px; /* Atstarpe starp burbulīti un tekstu */
+    margin-left: 0px; /* Your styling rules here */
 }
 
