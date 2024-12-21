@@ -74,6 +74,10 @@ body {
     white-space: nowrap; /* Keep text in a single line */
 }
 
+div.event-preview {
+    height: 10px
+}
+
 .event-preview span {
     margin-right: 6px;
     font-size: 40px;
