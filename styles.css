@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #b3b3b3;
+    background-color: #ffffff; /* Balta fona krāsa */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,10 +9,10 @@ body {
 }
 
 #calendar-container {
-    background: #f0f0f0;
+    background: #ffffff; /* Balta fona krāsa */
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 #calendar {
@@ -65,24 +65,4 @@ body {
     position: absolute;
     left: 5px;
     color: inherit;
-}
-
-.inactive {
-    background-color: #f0f0f0;
-    border: 1px solid transparent;
-    cursor: default;
-}
-
-.event {
-    display: block;
-    font-size: 12px;
-    margin-top: 5px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.event::before {
-    content: "•";
-    margin-right: 5px;
-    font-size: 16px;
 }
