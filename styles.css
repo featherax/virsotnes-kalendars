@@ -26,13 +26,23 @@ body {
 
 .day {
     border: 1px solid #0043b3;
-    padding: 15px;
-    text-align: center;
+    padding: 5px 10px; /* Neliels padding augšā un kreisajā pusē */
+    text-align: left; /* Teksts novietots pa kreisi */
     font-size: 16px;
     color: #0043b3;
     background-color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
+    position: relative; /* Nodrošina burbulīša pozicionēšanu */
+}
+
+.day .date-number {
+    font-weight: normal; /* Normāls svars datumiem */
+    color: #0043b3; /* Tumši zila krāsa */
+    font-size: 14px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
 }
 
 .day:hover {
@@ -45,6 +55,11 @@ body {
     color: #000;
 }
 
+.today .date-number {
+    font-weight: bold; /* Bold šodienas datumam */
+    color: #0043b3; /* Tā pati zilā krāsa */
+}
+
 .header {
     background-color: #0043b3;
     color: #fff;
@@ -54,15 +69,17 @@ body {
 }
 
 .event {
-    position: relative;
-    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    margin-top: 15px; /* Nedaudz atstatums zem datuma */
     font-size: 14px;
-    color: #000;
+    color: #0043b3; /* Tumši zils teksts */
+    text-decoration: none; /* Noņem linka apakšsvītru */
 }
 
 .event::before {
-    content: "•";
-    position: absolute;
-    left: 5px;
-    color: inherit;
+    content: "•"; /* Burbulītis pirms teksta */
+    font-size: 18px; /* Lielāks burbulītis */
+    color: inherit; /* Mantot krāsu no Google Sheets */
+    margin-right: 5px;
 }
