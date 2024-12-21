@@ -57,8 +57,6 @@ body {
     background-color: #b3d9ff;
     font-weight: bold;
     color: #0043b3;
-    border: 2px solid #0043b3; /* Papildu apmale šodienas datumam */
-    border-radius: 5px;
 }
 
 .today .date-number {
@@ -84,7 +82,7 @@ body {
 }
 
 .event::before {
-    content: "•"; /* Vienīgais burbulītis */
+    content: " "; /* Vienīgais burbulītis */
     font-size: 18px;
     color: inherit; /* Krāsa no Google Sheets */
     margin-right: 10px; /* Atstarpe starp burbulīti un tekstu */
