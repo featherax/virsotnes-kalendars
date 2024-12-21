@@ -43,31 +43,41 @@ for (let i = 0; i < remainingDays; i++) {
 }
 
 // Datu ielāde no Google Sheets
+// Ielādē datus no Google Sheets
 fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7kxqcZl4DZhkDN8rf9Wlvj8efL444O4qRHzuuFALCcsxuQco43tVymqa/pub?output=csv')
     .then(response => response.text())
     .then(data => {
         const rows = data.split('\n').slice(1); // Izlaiž virsraksta rindu
-        const eventsByDate = {};
-
         rows.forEach(row => {
-            const [name, date, link, color, image, description] = row.split(',');
+            const [name, date, link, color] = row.split(',');
             const eventDate = new Date(date).getDate();
 
-            if (!eventsByDate[eventDate]) eventsByDate[eventDate] = [];
-            eventsByDate[eventDate].push({ name, link, color, image, description });
-        });
+            // Atrodi pareizo dienas elementu
+            const dayElements = document.querySelectorAll('.day');
+            dayElements.forEach(dayEl => {
+                const dateSpan = dayEl.querySelector('.date-number');
+                if (dateSpan && parseInt(dateSpan.textContent) === eventDate) {
+                    // Pievieno preview burbulīti un nosaukumu
+                    const preview = document.createElement('div');
+                    preview.classList.add('event-preview');
+                    preview.innerHTML = `<span style="color: ${color};">•</span> ${name.length > 16 ? name.substring(0, 16) + '...' : name}`;
+                    dayEl.appendChild(preview);
 
-        document.querySelectorAll('.day').forEach(dayEl => {
-            const date = parseInt(dayEl.textContent);
-
-            if (eventsByDate[date]) {
-                dayEl.addEventListener('click', () => {
-                    showEventLog(eventsByDate[date], date);
-                });
-            }
+                    // Pilnais eventa elements priekš popup loga
+                    const eventLink = document.createElement('a');
+                    eventLink.href = link;
+                    eventLink.target = '_blank';
+                    eventLink.classList.add('event');
+                    eventLink.style.color = '#0043b3'; // Tumši zils teksts
+                    eventLink.innerHTML = `<span style="color: ${color}; font-size: 18px;">•</span> ${name}`;
+                    dayEl.dataset.events = dayEl.dataset.events || '';
+                    dayEl.dataset.events += preview.outerHTML + '\n';
+                }
+            });
         });
     })
-    .catch(error => console.error('Kļūda ielādējot datus:', error));
+    .catch(error => console.error('Error loading data:', error));
+
 
 // Funkcija eventu loga parādīšanai
 function showEventLog(events, date) {
