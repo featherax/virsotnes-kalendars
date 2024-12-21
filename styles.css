@@ -47,8 +47,9 @@ body {
     color: #0043b3;
     font-size: 14px;
     position: absolute;
-    top: 5px;
+    top: 5px; /* Datuma cipars paliek kvadrāta augšpusē */
     left: 10px;
+    z-index: 1; /* Augstāka prioritāte pār citiem elementiem */
 }
 
 .day:hover {
@@ -76,13 +77,15 @@ body {
 
 .event {
     display: flex;
-    align-items: center; /* Vertikāla izlīdzināšana ar burbulīti */
-    font-size: 12px; /* Mazāks teksta izmērs, lai ietilptu */
+    align-items: center;
+    font-size: 12px;
     color: #0043b3; /* Tumši zils teksts */
     text-decoration: none; /* Noņem linka apakšsvītru */
-    white-space: nowrap; /* Teksts paliek vienā rindā */
-    overflow: hidden; /* Paslēpt tekstu, kas pārsniedz kvadrātu */
-    text-overflow: ellipsis; /* Pievieno trīspunkti aprautam tekstam */
+    white-space: nowrap;
+    overflow: hidden; /* Paslēpt pārāk garu tekstu */
+    text-overflow: ellipsis;
+    margin-top: 25px; /* Atstāj vietu zem datuma cipara */
+    z-index: 0; /* Zemāka prioritāte nekā datuma ciparam */
 }
 
 .event::before {
