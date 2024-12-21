@@ -34,7 +34,8 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
     position: relative;
-    min-height: 80px; /* Vienāds minimālais augstums visiem kvadrātiem */
+    min-height: 60px; /* Vienāds minimālais augstums visiem kvadrātiem */
+    min-width: 60px; 
     display: flex;
     flex-direction: column; /* Atļauj sakārtot datumu un tekstu vertikāli */
     justify-content: flex-start; /* Saturs augšpusē */
