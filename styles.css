@@ -12,7 +12,6 @@ body {
     background: #ffffff; /* White background */
     border-radius: 20px;
     padding: 20px;
-    /* Remove box-shadow */
 }
 
 #calendar {
@@ -83,16 +82,17 @@ body {
     text-decoration: none; /* Noņem linka apakšsvītru */
     overflow: hidden; /* Paslēpj tekstu ārpus kvadrāta */
     text-overflow: ellipsis; /* Pievieno "..." pārāk gariem tekstiem */
-    white-space: normal; /* Atļauj tekstu lauzt jaunā rindā */
-    word-break: break-word; /* Pārlauž vārdus, ja tie ir pārāk gari */
+    white-space: nowrap; /* Neļauj lauzt tekstu jaunā rindā */
+    max-width: 100%; /* Ierobežo platumu kvadrāta robežās */
+    word-break: break-word; /* Atļauj tekstu pārlauzt, ja nepieciešams */
     line-height: 1.2; /* Uzlabo teksta lasāmību */
-    max-height: calc(1.2em * 2); /* Ierobežo augstumu līdz divām rindiņām */
     z-index: 0; /* Zemāka prioritāte nekā datuma ciparam */
     position: relative; /* Nodrošina, ka z-index tiek izmantots */
+    margin-top: 2px; /* Mazāka atstarpe starp vairākiem eventiem */
 }
 
 .event + .event {
-    margin-top: 5px; /* Mazāka atstarpe starp vairākiem eventiem */
+    margin-top: 2px; /* Mazāka atstarpe starp vairākiem eventiem */
 }
 
 .event::before {
@@ -104,8 +104,7 @@ body {
 }
 
 .event span {
-      font-size: 30px;
+    font-size: 30px;
     margin-right: 8px; /* Atstarpe starp burbulīti un tekstu */
-    margin-left: 0px; /* Your styling rules here */
+    margin-left: 0px;
 }
-
