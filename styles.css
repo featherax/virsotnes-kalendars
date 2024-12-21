@@ -89,3 +89,10 @@ body {
     margin-left: 12px;
     line-height: 1;
 }
+
+.event span {
+      font-size: 20px;
+    margin-right: 12px; /* Atstarpe starp burbulīti un tekstu */
+    margin-left: 12px; /* Your styling rules here */
+}
+
