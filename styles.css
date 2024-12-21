@@ -86,5 +86,6 @@ body {
     font-size: 20px;
     color: inherit; /* Krāsa no Google Sheets */
     margin-right: 0px; /* Atstarpe starp burbulīti un tekstu */
+    margin-left: 12px;
     line-height: 1;
 }
