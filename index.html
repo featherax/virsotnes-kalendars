@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Custom Calendar</title>
+    <title>Interactive Calendar</title>
 </head>
 <body>
     <div id="calendar-container">
+        <!-- Kalendāra daļa -->
         <div id="calendar">
             <div class="header">PR</div>
             <div class="header">OT</div>
@@ -17,16 +18,15 @@
             <div class="header">SE</div>
             <div class="header">SV</div>
         </div>
-    </div>
 
-    <!-- Pop-up loga konteiners -->
-    <div id="popup-container" class="hidden">
-        <button id="back-to-calendar">Atgriezties uz kalendāru</button>
-        <div id="popup-content">
-            <!-- Eventi tiks dinamiski pievienoti šeit -->
+        <!-- Eventu logs -->
+        <div id="event-log" class="hidden">
+            <button id="back-to-calendar">Atgriezties uz kalendāru</button>
+            <div id="event-content">
+                <!-- Eventi tiks dinamiski pievienoti -->
+            </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
