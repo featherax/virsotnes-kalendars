@@ -16,7 +16,11 @@ for (let i = 0; i < firstDayOffset; i++) {
 for (let day = 1; day <= daysInMonth; day++) {
     const dayDiv = document.createElement('div');
     dayDiv.classList.add('day');
-    dayDiv.textContent = day;
+
+    const dateSpan = document.createElement('span');
+    dateSpan.textContent = day;
+    dateSpan.classList.add('date-number');
+    dayDiv.appendChild(dateSpan);
 
     if (day === today) {
         dayDiv.classList.add('today');
@@ -37,9 +41,15 @@ fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7k
             // Atrodi pareizo dienas elementu
             const dayElements = document.querySelectorAll('.day');
             dayElements.forEach(dayEl => {
-                if (parseInt(dayEl.textContent) === eventDate) {
-                    dayEl.style.position = 'relative';
-                    dayEl.innerHTML += `<a href="${link}" target="_blank" class="event" style="color: ${color};">${name}</a>`;
+                const dateSpan = dayEl.querySelector('.date-number');
+                if (dateSpan && parseInt(dateSpan.textContent) === eventDate) {
+                    const eventLink = document.createElement('a');
+                    eventLink.href = link;
+                    eventLink.target = '_blank';
+                    eventLink.classList.add('event');
+                    eventLink.style.color = '#0043b3'; // Tumši zils teksts
+                    eventLink.innerHTML = `<span style="color: ${color}; font-size: 18px;">•</span> ${name}`;
+                    dayEl.appendChild(eventLink);
                 }
             });
         });
