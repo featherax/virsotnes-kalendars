@@ -38,6 +38,9 @@ fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7k
             const [name, date, link, color] = row.split(',');
             const eventDate = new Date(date).getDate();
 
+            // Saīsina event nosaukumu, ja tas pārsniedz 12 rakstzīmes
+            const truncatedName = name.length > 12 ? name.substring(0, 12) + "..." : name;
+
             // Atrodi pareizo dienas elementu
             const dayElements = document.querySelectorAll('.day');
             dayElements.forEach(dayEl => {
@@ -48,7 +51,7 @@ fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7k
                     eventLink.target = '_blank';
                     eventLink.classList.add('event');
                     eventLink.style.color = '#0043b3'; // Tumši zils teksts
-                    eventLink.innerHTML = `<span style="color: ${color}; font-size: 18px;">•</span> ${name}`;
+                    eventLink.innerHTML = `<span style="color: ${color}; font-size: 18px;">•</span> ${truncatedName}`;
                     dayEl.appendChild(eventLink);
                 }
             });
