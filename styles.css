@@ -75,7 +75,8 @@ body {
 }
 
 div.event-preview {
-    height: 10px
+    height: 12px
+    margin-top: 20px
 }
 
 .event-preview span {
