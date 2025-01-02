@@ -101,7 +101,7 @@ function fetchEvents(month, year) {
 }
 
 function showEventLog(events, date) {
-    eventContent.innerHTML = `<h2>Events on ${date}</h2>`;
+    eventContent.innerHTML = `<h2>Pasākumi ${date}. datumā</h2>`;
     events.forEach((event) => {
         const eventBox = document.createElement('div');
         eventBox.classList.add('event-box');
