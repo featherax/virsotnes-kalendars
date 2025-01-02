@@ -3,9 +3,8 @@ const eventLog = document.getElementById('event-log');
 const eventContent = document.getElementById('event-content');
 const backToCalendar = document.getElementById('back-to-calendar');
 
-const today = new Date();
-const currentMonth = today.getMonth();
-const currentYear = today.getFullYear();
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
 
 function generateCalendar(month, year) {
     const firstDay = new Date(year, month, 1).getDay();
@@ -35,7 +34,11 @@ function generateCalendar(month, year) {
         dateSpan.classList.add('date-number');
         dayDiv.appendChild(dateSpan);
 
-        if (day === today.getDate() && month === currentMonth && year === currentYear) {
+        if (
+            day === new Date().getDate() &&
+            month === new Date().getMonth() &&
+            year === new Date().getFullYear()
+        ) {
             dayDiv.classList.add('today');
         }
 
@@ -43,43 +46,70 @@ function generateCalendar(month, year) {
     }
 }
 
-fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7kxqcZl4DZhkDN8rf9Wlvj8efL444O4qRHzuuFALCcsxuQco43tVymqa/pub?output=csv')
-    .then(response => response.text())
-    .then(data => {
-        const rows = data.split('\n').slice(1);
-        const eventMap = {};
+function fetchEvents(month, year) {
+    fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcaQ9SI0Xtihv-83AA0e4J7kxqcZl4DZhkDN8rf9Wlvj8efL444O4qRHzuuFALCcsxuQco43tVymqa/pub?output=csv'
+    )
+        .then((response) => response.text())
+        .then((data) => {
+            const rows = data.split('\n').slice(1);
+            const eventMap = {};
 
-        rows.forEach(row => {
-            const [name, date, link, color, imageUrl, description] = row.split(',');
-            const eventDate = new Date(date).getDate();
+            rows.forEach((row) => {
+                const [name, date, link, color, imageUrl, description] =
+                    row.split(',');
+                const eventDate = new Date(date.trim());
 
-            if (!eventMap[eventDate]) eventMap[eventDate] = [];
-            eventMap[eventDate].push({ name, link, color, imageUrl, description });
+                if (
+                    eventDate.getMonth() === month &&
+                    eventDate.getFullYear() === year
+                ) {
+                    const day = eventDate.getDate();
 
-            const dayElements = document.querySelectorAll('.day');
-            dayElements.forEach(dayEl => {
-                const dateSpan = dayEl.querySelector('.date-number');
-                if (dateSpan && parseInt(dateSpan.textContent) === eventDate) {
-                    const preview = document.createElement('div');
-                    preview.classList.add('event-preview');
-                    preview.innerHTML = `<span style="color: ${color};">•</span> ${name.substring(0, 16)}...`;
-                    dayEl.appendChild(preview);
-                    dayEl.addEventListener('click', () => showEventLog(eventMap[eventDate], eventDate));
+                    if (!eventMap[day]) eventMap[day] = [];
+                    eventMap[day].push({
+                        name,
+                        link,
+                        color,
+                        imageUrl,
+                        description,
+                    });
+
+                    const dayElements = document.querySelectorAll('.day');
+                    dayElements.forEach((dayEl) => {
+                        const dateSpan = dayEl.querySelector('.date-number');
+                        if (
+                            dateSpan &&
+                            parseInt(dateSpan.textContent) === day
+                        ) {
+                            const preview = document.createElement('div');
+                            preview.classList.add('event-preview');
+                            preview.innerHTML = `<span style="color: ${color};">•</span> ${name.substring(
+                                0,
+                                16
+                            )}...`;
+                            dayEl.appendChild(preview);
+                            dayEl.addEventListener('click', () =>
+                                showEventLog(eventMap[day], day)
+                            );
+                        }
+                    });
                 }
             });
-        });
-    });
+        })
+        .catch((error) => console.error('Error loading events:', error));
+}
 
 function showEventLog(events, date) {
     eventContent.innerHTML = `<h2>Events on ${date}</h2>`;
-    events.forEach(event => {
+    events.forEach((event) => {
         const eventBox = document.createElement('div');
         eventBox.classList.add('event-box');
         eventBox.innerHTML = `
             <img src="${event.imageUrl.trim()}" alt="${event.name}" />
             <div class="event-details">
                 <h3>${event.name}</h3>
-                <p>${event.description || "No description available."}</p>
+                <p>${event.description || 'No description available.'}</p>
                 <a href="${event.link.trim()}" target="_blank">View More</a>
             </div>`;
         eventContent.appendChild(eventBox);
@@ -96,3 +126,4 @@ backToCalendar.addEventListener('click', () => {
 });
 
 generateCalendar(currentMonth, currentYear);
+fetchEvents(currentMonth, currentYear);
